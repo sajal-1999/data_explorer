@@ -53,6 +53,19 @@ The project is hosted on DigitalOcean: [Game Data Explorer](http://139.59.59.184
     ```
 
 ---
+## Cost Estimation
+
+### Assumptions:
+- 1 CSV upload and 100 queries per day.
+
+### Costs:
+- **DigitalOcean Droplet**: Basic plan with 1GB RAM costs $6 per month.
+- **ClickHouse**: Using Docker, ClickHouse is hosted locally on the same droplet, so no additional costs.
+
+### Total: 
+- ~$6 per month.
+
+---
 
 ## Running the Project Locally
 
