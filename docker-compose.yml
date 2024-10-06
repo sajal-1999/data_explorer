@@ -1,0 +1,27 @@
+services:
+  clickhouse:
+    image: clickhouse/clickhouse-server:latest
+    container_name: clickhouse
+    ports:
+      - "8123:8123" # HTTP interface for ClickHouse
+      - "9000:9000" # Native ClickHouse port
+    environment:
+      - CLICKHOUSE_DB=analytics
+      - CLICKHOUSE_USER=user
+      - CLICKHOUSE_PASSWORD=clickhouse
+
+    volumes:
+      - clickhouse_data:/var/lib/clickhouse
+
+  web:
+    build: .
+    command: sh -c "./wait_for_clickhouse.sh clickhouse 9000 && python manage.py shell -c 'from core.models import GameData; GameData.create_clickhouse_table()' && gunicorn --bind 0.0.0.0:8000 data_explorer.wsgi:application"
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+      - clickhouse
+
+volumes:
+  clickhouse_data:
