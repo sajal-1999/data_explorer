@@ -200,6 +200,21 @@ The project is hosted on DigitalOcean: [Game Data Explorer](http://139.59.59.184
   - **Success**: List of matching game data.
   - **Failure**: `{"error": "Error message."}`
 
+## Why Clickhouse over Postgres?
+
+ClickHouse is a better choice than PostgreSQL for this project as it is optimised for analytical queries and high read performance. 
+
+1. **Columnar Storage**: ClickHouse uses a columnar storage format, which means data is stored column-wise rather than row-wise. This enhances read performance, especially for analytical queries that often involve aggregations and filtering across large datasets. ClickHouse minimizes I/O operations.
+
+2. **High Throughput for Read Operations**: ClickHouse is designed to handle high throughput for read queries, allowing it to efficiently process a large number of simultaneous queries. This is ideal for this project since multiple analysts can be querying the data concurrently.
+
+3. **Optimized for Complex Queries**: ClickHouse supports complex SQL queries with advanced aggregation functions and subqueries. Its engine is built for fast processing of analytical queries, enabling quick retrieval of data from large datasets.
+
+4. **Parallel Processing**: ClickHouse can execute queries in parallel across multiple CPU cores and nodes, further enhancing performance for large datasets and complex analytical tasks.
+
+Overall, ClickHouse is specifically optimized for analytical workloads, making it a superior choice for applications focused on reading and querying large datasets with complex queries compared to traditional relational databases like PostgreSQL.
+
+
 ## Future Optimisations
 1. Adding basic auth
 2. Fixing & Prettifying UI
